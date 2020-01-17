@@ -1,0 +1,32 @@
+{
+  "name": "georgehanson/laravel-saas",
+  "description": "A Laravel Package to help make building SaaS projects easier and quicker.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "George Hanson",
+      "email": "george@georgehanson.co.uk"
+    }
+  ],
+  "require": {
+    "illuminate/support": "^6.0",
+    "illuminate/database": "^6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.4",
+    "squizlabs/php_codesniffer": "^3.1",
+    "fzaninotto/faker": "^1.7",
+    "mockery/mockery": "^1.0",
+    "orchestra/testbench": "^3.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "GeorgeHanson\\SaaS\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GeorgeHanson\\SaaS\\Tests\\": "tests/"
+    }
+  }
+}
