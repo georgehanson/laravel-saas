@@ -16,5 +16,9 @@ class LaravelSaaSServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/saas.php' => config_path('saas.php')
         ]);
+
+        $this->loadMigrationsFrom([
+            __DIR__.'/../database/migrations'
+        ]);
     }
 }
