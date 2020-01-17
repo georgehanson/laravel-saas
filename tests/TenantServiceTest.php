@@ -8,7 +8,6 @@ use GeorgeHanson\SaaS\Services\Tenant;
 
 class TenantServiceTest extends TestCase
 {
-    use RefreshDatabase;
 
     public function testATenantCanBeCreated()
     {
@@ -23,5 +22,11 @@ class TenantServiceTest extends TestCase
             ->create(['name' => 'John Doe', 'email' => 'john@example.com', 'password' => 'password']);
 
         $this->assertDatabaseHas('users', ['name' => 'John Doe', 'email' => 'john@example.com', 'password' => 'password']);
+    }
+
+    public function testIfBillingIsEnabledACustomerIsCreatedWhenCreatingTheTenant()
+    {
+        $tenant = (new Tenant())->create('ABC Industries');
+        $this->assertNotNull($tenant->fresh()->customer_id);
     }
 }

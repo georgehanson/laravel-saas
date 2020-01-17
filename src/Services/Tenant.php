@@ -11,6 +11,22 @@ class Tenant
      */
     public function create($name)
     {
-        return \GeorgeHanson\SaaS\Database\Models\Tenant::create(['name' => $name]);
+        $tenant = \GeorgeHanson\SaaS\Database\Models\Tenant::create(['name' => $name]);
+
+        if (config('saas.billing.enabled')) {
+            $this->getPaymentGateway()->createCustomer($tenant);
+        }
+
+        return $tenant;
+    }
+
+    /**
+     * Get the payment gateway.
+     *
+     * @return PaymentGateway
+     */
+    protected function getPaymentGateway()
+    {
+        return app(PaymentGateway::class);
     }
 }

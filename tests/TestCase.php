@@ -3,7 +3,10 @@
 
 namespace GeorgeHanson\SaaS\Tests;
 
+use GeorgeHanson\SaaS\LaravelSaaSServiceProvider;
+use GeorgeHanson\SaaS\Services\PaymentGateway;
 use GeorgeHanson\SaaS\Services\Tenant;
+use GeorgeHanson\SaaS\Tests\Resources\FakePaymentGateway;
 use GeorgeHanson\SaaS\Tests\Resources\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
@@ -18,11 +21,15 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     public function setUp(): void
     {
         parent::setUp();
+        $this->loadLaravelMigrations();
         $this->withFactories(__DIR__ . '/../database/factories');
         $this->withFactories(__DIR__ . '/factories');
-        $this->loadLaravelMigrations();
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         $this->loadMigrationsFrom(__DIR__ . '/migrations');
+
+        $this->app->bind(PaymentGateway::class, function () {
+            return app(FakePaymentGateway::class);
+        });
     }
 
     /**
@@ -44,7 +51,9 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      */
     protected function getPackageProviders($app)
     {
-        return [];
+        return [
+            LaravelSaaSServiceProvider::class
+        ];
     }
 
     /**
