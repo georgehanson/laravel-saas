@@ -1,9 +1,9 @@
 <?php
 
 
-namespace GeorgeHanson\Saas\Tests;
+namespace GeorgeHanson\SaaS\Tests;
 
-
+use GeorgeHanson\SaaS\Tests\Resources\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,7 +17,9 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->withFactories(__DIR__.'/../factories');
+        $this->withFactories(__DIR__ . '/../database/factories');
+        $this->loadLaravelMigrations();
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     /**
@@ -39,5 +41,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     protected function getEnvironmentSetUp($app)
     {
         Hash::setRounds(4);
+        $app['config']->set('saas.user_model', User::class);
     }
 }
