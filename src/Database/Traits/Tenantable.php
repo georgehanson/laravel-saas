@@ -3,6 +3,7 @@
 
 namespace GeorgeHanson\SaaS\Database\Traits;
 
+use GeorgeHanson\SaaS\Database\Models\Tenant;
 use GeorgeHanson\SaaS\Database\Scopes\TenantableScope;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,5 +18,15 @@ trait Tenantable
         });
 
         static::addGlobalScope(new TenantableScope());
+    }
+
+    /**
+     * The tenant for this tenantable instance.
+     *
+     * @return mixed
+     */
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
     }
 }

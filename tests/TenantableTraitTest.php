@@ -36,4 +36,12 @@ class TenantableTraitTest extends TestCase
         $this->actingAs($ben);
         $this->assertCount(2, Customer::all());
     }
+
+    public function testIfAModelIsTenantableItCanAccessTheTenantModel()
+    {
+        $bill = $this->createUserAndTenant();
+        $customer = Customer::create(['name' => 'My Customer', 'tenant_id' => $bill->tenant_id]);
+
+        $this->assertEquals($bill->tenant_id, $customer->tenant->id);
+    }
 }
