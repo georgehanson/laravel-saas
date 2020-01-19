@@ -17,7 +17,7 @@ interface PaymentGateway
      * Create the session token.
      *
      * @param Tenant $tenant
-     * @return mixed
+     * @return StripeSessionBuilder
      */
     public function createSessionToken(Tenant $tenant);
 }
