@@ -39,6 +39,6 @@ class LaravelSaaSServiceProvider extends ServiceProvider
             }
         });
 
-        \Stripe\Stripe::setApiKey(config('saas.billing.providers.stripe.api_key'));
+        \Stripe\Stripe::setApiKey(config('saas.billing.providers.stripe.secret_key'));
     }
 }
