@@ -29,10 +29,13 @@ class Plan
 
     /**
      * @param string $name
+     * @return Plan
      */
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -45,10 +48,13 @@ class Plan
 
     /**
      * @param string $stripeId
+     * @return Plan
      */
     public function setStripeId($stripeId)
     {
         $this->stripeId = $stripeId;
+
+        return $this;
     }
 
     /**
@@ -61,9 +67,24 @@ class Plan
 
     /**
      * @param int $price
+     * @return Plan
      */
     public function setPrice($price)
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Create the plan.
+     *
+     * @return Plan
+     */
+    public function create()
+    {
+        Plans::addPlan($this);
+
+        return $this;
     }
 }
