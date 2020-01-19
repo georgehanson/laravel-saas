@@ -17,9 +17,6 @@ class CreateTenantsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('customer_id')->nullable();
-            $table->boolean('subscribed')->default(0);
-            $table->dateTime('subscribed_at')->nullable();
-            $table->dateTime('subcription_expires_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
