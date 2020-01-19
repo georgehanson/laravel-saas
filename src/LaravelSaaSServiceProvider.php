@@ -34,11 +34,9 @@ class LaravelSaaSServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/saas.php', 'saas');
 
         $this->app->singleton(PaymentGateway::class, function () {
-            if (config('saas.billing.provider') === 'stripe') {
-                return app(Stripe::class);
-            }
+            return app(Stripe::class);
         });
 
-        \Stripe\Stripe::setApiKey(config('saas.billing.providers.stripe.secret_key'));
+        \Stripe\Stripe::setApiKey(config('saas.billing.stripe.secret_key'));
     }
 }

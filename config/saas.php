@@ -25,15 +25,20 @@ return [
         'enabled' => true,
 
         /**
-         * Options: stripe
+         * Stripe settings.
          */
-        'provider' => 'stripe',
+        'stripe' => [
+            'secret_key' => env('STRIPE_SECRET_KEY', ''),
+            'public_key' => env('STRIPE_PUBLIC_KEY', ''),
+        ],
+        /**
+         * The url you would like to take the customer to when they successfully subscribe.
+         */
+        'success_url_redirect' => '',
 
-        'providers' => [
-            'stripe' => [
-                'secret_key' => env('STRIPE_SECRET_KEY', ''),
-                'public_key' => env('STRIPE_PUBLIC_KEY', ''),
-            ]
-        ]
+        /**
+         * The url you would like to take the customer to when they cancel during the subscribe process.
+         */
+        'cancel_url_redirect' => '',
     ],
 ];
