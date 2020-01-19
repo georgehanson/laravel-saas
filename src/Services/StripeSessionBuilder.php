@@ -49,8 +49,8 @@ class StripeSessionBuilder
                     ['plan' => $this->plan]
                 ]
             ],
-            'success_url' => config('saas.billing.success_url_redirect'),
-            'cancel_url' => config('saas.billing.cancel_url_redirect'),
+            'success_url' => url(config('saas.billing.success_url_redirect')),
+            'cancel_url' => url(config('saas.billing.cancel_url_redirect')),
         ]);
     }
 }
