@@ -20,4 +20,14 @@ should be an unsigned integer.
 
 ### Subscription Payments
 
+This package offers built in subscription payments. This options for this can be configured within the config file.
+There you can enable/disable billing as well as specifying which payment gateway you would like to use and the relevant
+API credentials for it. For security we recommend storing the API keys within an environment variable rather than hardcoding
+them straight into the configuration.
+
+Currently this package only supports stripe.
+
+If billing is enabled, when a tenant is created using the Tenant service, it automatically registers a customer within
+Stripe and stores their customer id. This is used later on for adding cards, taking payments and more.
+
 WIP
