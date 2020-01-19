@@ -2,6 +2,8 @@
 
 namespace GeorgeHanson\SaaS\Plans;
 
+use Illuminate\Support\Collection;
+
 class Plans
 {
     /**
@@ -22,10 +24,10 @@ class Plans
     /**
      * Get all of the plans.
      *
-     * @return array<Plan>
+     * @return Collection
      */
     public static function getPlans()
     {
-        return static::$plans;
+        return collect(static::$plans);
     }
 }

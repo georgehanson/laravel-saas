@@ -3,6 +3,7 @@
 namespace GeorgeHanson\SaaS\Services;
 
 use GeorgeHanson\SaaS\Plans\Plan;
+use GeorgeHanson\SaaS\Plans\Plans;
 use Stripe\Checkout\Session;
 
 class StripeSessionBuilder
@@ -29,11 +30,15 @@ class StripeSessionBuilder
     /**
      * The plan to create the stripe session for.
      *
-     * @param Plan $plan
+     * @param string $plan
      * @return StripeSessionBuilder
      */
-    public function forPlan(Plan $plan)
+    public function forPlan($plan)
     {
+        $plan = Plans::getPlans()->filter(function (Plan $record) use ($plan) {
+            return $record->getName() === $plan;
+        })->first();
+
         $this->plan = $plan->getStripeId();
 
         return $this;
