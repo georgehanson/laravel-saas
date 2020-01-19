@@ -25,7 +25,7 @@ There you can enable/disable billing as well as specifying which payment gateway
 API credentials for it. For security we recommend storing the API keys within an environment variable rather than hardcoding
 them straight into the configuration.
 
-Currently this package only supports stripe.
+Currently this package only supports Stripe.
 
 If billing is enabled, when a tenant is created using the Tenant service, it automatically registers a customer within
 Stripe and stores their customer id. This is used later on for adding cards, taking payments and more.
