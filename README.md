@@ -31,6 +31,7 @@ If billing is enabled, when a tenant is created using the Tenant service, it aut
 Stripe and stores their customer id. This is used later on for adding cards, taking payments and more.
 
 In order to create a plan, we recommend adding the code within a service provider. You can use your `AppServiceProvider`
-or create your own custom one. Here you can create an instance of the `GeorgeHanson\SaaS\Plans\Plan` object.
+or create your own custom one. Here you can create an instance of the `GeorgeHanson\SaaS\Plans\Plan` object. Be sure to
+call the `create` method on the `Plan` object in order for it to be registered.
 
 WIP
