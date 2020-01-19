@@ -12,4 +12,12 @@ interface PaymentGateway
      * @return mixed
      */
     public function createCustomer(Tenant $tenant);
+
+    /**
+     * Create the session token.
+     *
+     * @param Tenant $tenant
+     * @return mixed
+     */
+    public function createSessionToken(Tenant $tenant);
 }

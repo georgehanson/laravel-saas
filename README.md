@@ -34,4 +34,8 @@ In order to create a plan, we recommend adding the code within a service provide
 or create your own custom one. Here you can create an instance of the `GeorgeHanson\SaaS\Plans\Plan` object. Be sure to
 call the `create` method on the `Plan` object in order for it to be registered.
 
+To subscribe the user to a plan the first thing you need to do is create a Checkout Session. You can look at the Stripe
+documentation for more information on how this works. To create a session, you can simply call the `createSessionToken`
+method on the payment gateway class. This will return a string session to be used within the frontend.
+
 WIP
