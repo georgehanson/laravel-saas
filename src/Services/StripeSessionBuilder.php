@@ -30,10 +30,13 @@ class StripeSessionBuilder
      * The plan to create the stripe session for.
      *
      * @param Plan $plan
+     * @return StripeSessionBuilder
      */
     public function forPlan(Plan $plan)
     {
         $this->plan = $plan->getStripeId();
+
+        return $this;
     }
 
     /**
