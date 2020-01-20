@@ -30,7 +30,7 @@ class CheckoutSessionCompleted implements Handler
         $paymentMethod->attach(['customer' => $intent->metadata->customer_id]);
 
         Customer::update($intent->metadata->customer_id, [
-            'default_payment_method' => $intent->payment_method
+            'invoice_settings' => ['default_payment_method' => $intent->payment_method],
         ]);
     }
 
