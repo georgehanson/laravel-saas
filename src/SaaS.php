@@ -58,9 +58,15 @@ class SaaS
         return null;
     }
 
-    public static function subscriptionEndingSoon()
+    /**
+     * Check to see if the subscription is ending soon.
+     *
+     * @param Tenant|null $tenant
+     * @return bool
+     */
+    public static function subscriptionEndingSoon(Tenant $tenant = null)
     {
-        $tenant = static::tenant();
+        $tenant = $tenant ?? static::tenant();
 
         if ($tenant->subscription_active) {
             return false;
@@ -69,6 +75,23 @@ class SaaS
         if (is_null($tenant->subscription_ends_at)) {
             return false;
         }
+
+        if ($tenant->subscription_ends_at->gt(now())) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Check to see if the tenant is subscribed.
+     *
+     * @param Tenant|null $tenant
+     * @return bool
+     */
+    public static function isSubscribed(Tenant $tenant = null)
+    {
+        $tenant = $tenant ?? static::tenant();
 
         if ($tenant->subscription_ends_at->gt(now())) {
             return true;
