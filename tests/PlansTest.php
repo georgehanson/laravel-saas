@@ -2,25 +2,21 @@
 
 namespace GeorgeHanson\SaaS\Tests;
 
-use GeorgeHanson\SaaS\Plans\Plan;
-use GeorgeHanson\SaaS\Plans\Plans;
+use GeorgeHanson\SaaS\SaaS;
 
 class PlansTest extends TestCase
 {
     public function testAPlanCanBeCreated()
     {
-        $plan = (new Plan())
-            ->setName('My Plan')
-            ->setStripeId('1234')
-            ->setPrice(999)
-            ->create();
+        SaaS::plan('My Plan', 'my-plan');
 
-        $this->assertCount(1, Plans::getPlans());
+        $plans = SaaS::getPlans();
 
-        $saved = Plans::getPlans()[0];
+        $this->assertCount(1, $plans);
+
+        $saved = $plans->first();
 
         $this->assertEquals('My Plan', $saved->getName());
-        $this->assertEquals('1234', $saved->getStripeId());
-        $this->assertEquals(999, $saved->getPrice());
+        $this->assertEquals('my-plan', $saved->getStripeId());
     }
 }

@@ -31,8 +31,16 @@ If billing is enabled, when a tenant is created using the Tenant service, it aut
 Stripe and stores their customer id. This is used later on for adding cards, taking payments and more.
 
 In order to create a plan, we recommend adding the code within a service provider. You can use your `AppServiceProvider`
-or create your own custom one. Here you can create an instance of the `GeorgeHanson\SaaS\Plans\Plan` object. Be sure to
-call the `create` method on the `Plan` object in order for it to be registered.
+or create your own custom one. Here you can call the `plan` method on the `SaaS` class. For example:
+
+```php
+public function boot()
+{
+    SaaS::plan('My Plan', 'stripe-plan-id');
+}
+```
+
+The above code will register a plan with the package.
 
 To subscribe the user to a plan the first thing you need to do is create a Checkout Session. You can look at the Stripe
 documentation for more information on how this works. To create a session, you can simply call the `createSessionToken`

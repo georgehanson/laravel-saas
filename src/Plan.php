@@ -1,6 +1,6 @@
 <?php
 
-namespace GeorgeHanson\SaaS\Plans;
+namespace GeorgeHanson\SaaS;
 
 class Plan
 {
