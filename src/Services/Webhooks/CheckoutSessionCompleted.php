@@ -27,9 +27,9 @@ class CheckoutSessionCompleted implements Handler
         $session = $this->getSessionObject($event);
         $intent = SetupIntent::retrieve($session->setup_intent);
         $paymentMethod = PaymentMethod::retrieve($intent->payment_method);
-        $paymentMethod->attach(['customer' => $intent->customer]);
+        $paymentMethod->attach(['customer' => $intent->metadata->customer_id]);
 
-        Customer::update($intent->customer, [
+        Customer::update($intent->metadata->customer_id, [
             'default_payment_method' => $intent->payment_method
         ]);
     }
