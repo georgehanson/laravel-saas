@@ -17,7 +17,7 @@ class CreateTenantPaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('tenant_id');
             $table->integer('amount');
-            $table->integer('charge_id');
+            $table->string('charge_id');
             $table->softDeletes();
             $table->timestamps();
         });

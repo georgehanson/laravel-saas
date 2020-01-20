@@ -21,7 +21,7 @@ class SubscriptionDeleted implements Handler
         $tenant = Tenant::where('customer_id', $subscription->customer)->first();
 
         $tenant->update([
-            'subscription_active' => $subscription->plan->active
+            'subscription_active' => false
         ]);
     }
 
