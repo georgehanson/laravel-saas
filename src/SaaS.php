@@ -3,6 +3,7 @@
 
 namespace GeorgeHanson\SaaS;
 
+use GeorgeHanson\SaaS\Database\Models\Tenant;
 use GeorgeHanson\SaaS\Plan;
 use Illuminate\Support\Collection;
 
@@ -41,5 +42,19 @@ class SaaS
     public static function getPlans()
     {
         return collect(static::$plans);
+    }
+
+    /**
+     * Get the tenant logged in.
+     *
+     * @return Tenant
+     */
+    public static function tenant()
+    {
+        if ($user = auth()->user()) {
+            return Tenant::find($user->tenant_id);
+        }
+
+        return null;
     }
 }
