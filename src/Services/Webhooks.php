@@ -4,6 +4,7 @@
 namespace GeorgeHanson\SaaS\Services;
 
 use GeorgeHanson\SaaS\Exceptions\WebhookCouldNotBeVerifiedException;
+use GeorgeHanson\SaaS\Services\Webhooks\ChargeSucceeded;
 use GeorgeHanson\SaaS\Services\Webhooks\InvoicePaymentSucceeded;
 use Stripe\Event;
 use Stripe\Exception\SignatureVerificationException;
@@ -18,7 +19,9 @@ class Webhooks
      * @var array
      */
     protected $events = [
-        'invoice.payment_succeeded' => InvoicePaymentSucceeded::class
+        'invoice.payment_succeeded' => InvoicePaymentSucceeded::class,
+        'charge.succeeded' => ChargeSucceeded::class,
+        'customer.subscription.deleted'
     ];
 
     /**

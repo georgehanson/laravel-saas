@@ -21,4 +21,14 @@ class Tenant extends Model
     {
         return $this->hasMany(config('saas.user_model'));
     }
+
+    /**
+     * The payments for this tenant.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }
