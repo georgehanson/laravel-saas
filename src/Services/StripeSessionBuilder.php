@@ -2,8 +2,8 @@
 
 namespace GeorgeHanson\SaaS\Services;
 
-use GeorgeHanson\SaaS\Plans\Plan;
-use GeorgeHanson\SaaS\Plans\Plans;
+use GeorgeHanson\SaaS\Plan;
+use GeorgeHanson\SaaS\SaaS;
 use Stripe\Checkout\Session;
 
 class StripeSessionBuilder
@@ -35,7 +35,7 @@ class StripeSessionBuilder
      */
     public function forPlan($plan)
     {
-        $plan = Plans::getPlans()->filter(function (Plan $record) use ($plan) {
+        $plan = SaaS::getPlans()->filter(function (Plan $record) use ($plan) {
             return $record->getName() === $plan;
         })->first();
 
