@@ -57,4 +57,23 @@ class SaaS
 
         return null;
     }
+
+    public static function subscriptionEndingSoon()
+    {
+        $tenant = static::tenant();
+
+        if ($tenant->subscription_active) {
+            return false;
+        }
+
+        if (is_null($tenant->subscription_ends_at)) {
+            return false;
+        }
+
+        if ($tenant->subscription_ends_at->gt(now())) {
+            return true;
+        }
+
+        return false;
+    }
 }

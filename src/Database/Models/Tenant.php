@@ -12,6 +12,10 @@ class Tenant extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'subscription_ends_at' => 'datetime'
+    ];
+
     /**
      * Get the users for the tenant.
      *
