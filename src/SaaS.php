@@ -14,6 +14,14 @@ class SaaS
     protected static $plans = [];
 
     /**
+     * Get the subscribe url for plans.
+     */
+    public static function subscribeUrl()
+    {
+        return url('saas/subscribe');
+    }
+
+    /**
      * Setup a new plan.
      *
      * @param $name

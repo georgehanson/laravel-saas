@@ -42,8 +42,32 @@ public function boot()
 
 The above code will register a plan with the package.
 
-To subscribe the user to a plan the first thing you need to do is create a Checkout Session. You can look at the Stripe
-documentation for more information on how this works. To create a session, you can simply call the `createSessionToken`
-method on the payment gateway class. This will return a string session to be used within the frontend.
+To subscribe the user to the a plan you need to make a form request to the SaaS subscribe endpoint, including the plan
+name within the request. For example, you may have a form like this on your page.
+
+```blade
+<form action="{{ SaaS::subscribeUrl() }}" method="POST">
+    @csrf
+    <input type="hidden" name="plan" value="My Plan">
+    <div class="card mb-4 box-shadow">
+        <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Enterprise</h4>
+        </div>
+        <div class="card-body">
+            <h1 class="card-title pricing-card-title">£19.99 <small class="text-muted">/ mo</small></h1>
+            <ul class="list-unstyled mt-3 mb-4">
+                <li>30 users included</li>
+                <li>15 GB of storage</li>
+                <li>Phone and email support</li>
+                <li>Help center access</li>
+            </ul>
+            <button type="submit" class="btn btn-lg btn-block btn-primary">Sign Up</button>
+        </div>
+    </div>
+</form>
+```
+
+Then when the user submits the form, they will be taken to Stripes Checkout page where they can enter their relevant card
+details. Once complete they will be returned to the urls specified within the `saas.php` config file.
 
 WIP
