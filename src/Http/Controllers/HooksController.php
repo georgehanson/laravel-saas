@@ -20,7 +20,8 @@ class HooksController extends Controller
     public function handle(Request $request, Webhooks $webhooks)
     {
         try {
-            $event = $webhooks->verify($request->json(), $request->header('HTTP_STRIPE_SIGNATURE'));
+            $event = $webhooks->verify(@file_get_contents('php://input'), $_SERVER['HTTP_STRIPE_SIGNATURE']);
+            $event = $webhooks->verify(@file_get_contents('php://input'), $_SERVER['HTTP_STRIPE_SIGNATURE']);
             $webhooks->handle($event);
 
             return response()->json(['message' => 'Success'], 200);
