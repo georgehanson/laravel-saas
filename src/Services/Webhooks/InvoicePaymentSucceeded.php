@@ -3,8 +3,11 @@
 
 namespace GeorgeHanson\SaaS\Services\Webhooks;
 
+use GeorgeHanson\SaaS\Services\Tenant;
 use Illuminate\Support\Facades\Log;
 use Stripe\Event;
+use Stripe\Invoice;
+use Stripe\InvoiceLineItem;
 
 class InvoicePaymentSucceeded implements Handler
 {
@@ -16,7 +19,31 @@ class InvoicePaymentSucceeded implements Handler
      */
     public function process(Event $event)
     {
-       // The invoice payment was successful. We need to mark the tenants subscription as active and set the expiry date.
-        Log::error($event->data->lines->data[0]->plan);
+        $invoice = $this->getInvoiceObject($event);
+        $line = $this->getFirstLineItem($invoice);
+
+        Tenant::activateSubscription($invoice->customer, $line->period->end, $line->plan->nickname);
+    }
+
+    /**
+     * Get the first line item.
+     *
+     * @param Invoice $invoice
+     * @return InvoiceLineItem
+     */
+    protected function getFirstLineItem(Invoice $invoice)
+    {
+        return $invoice->lines->data[0];
+    }
+
+    /**
+     * Get the invoice object.
+     *
+     * @param Event $event
+     * @return Invoice
+     */
+    protected function getInvoiceObject(Event $event)
+    {
+        return $event->data->object;
     }
 }

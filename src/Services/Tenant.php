@@ -5,6 +5,23 @@ namespace GeorgeHanson\SaaS\Services;
 class Tenant
 {
     /**
+     * Activate the subscription for the tenant.
+     *
+     * @param $customerId
+     * @param $endsAt
+     * @param $nickname
+     */
+    public static function activateSubscription($customerId, $endsAt, $nickname)
+    {
+        $tenant = \GeorgeHanson\SaaS\Database\Models\Tenant::where('customer_id', $customerId)->first();
+        $tenant->update([
+            'subscription_ends_at' => \Carbon\Carbon::createFromTimestamp($endsAt),
+            'subscription_active' => true,
+            'subscription_plan' => $nickname
+        ]);
+    }
+
+    /**
      * Create a new tenant
      * @param $name
      * @return Tenant
