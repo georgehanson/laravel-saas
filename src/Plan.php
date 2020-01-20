@@ -15,11 +15,6 @@ class Plan
     protected $stripeId;
 
     /**
-     * @var int
-     */
-    protected $price;
-
-    /**
      * @return string
      */
     public function getName()
@@ -53,37 +48,6 @@ class Plan
     public function setStripeId($stripeId)
     {
         $this->stripeId = $stripeId;
-
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param int $price
-     * @return Plan
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Create the plan.
-     *
-     * @return Plan
-     */
-    public function create()
-    {
-        Plans::addPlan($this);
 
         return $this;
     }
