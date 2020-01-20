@@ -20,6 +20,7 @@ class CreateTenantsTable extends Migration
             $table->timestamp('subscription_ends_at')->nullable();
             $table->boolean('subscription_active')->default(0);
             $table->string('subscription_plan')->nullable();
+            $table->string('subscription_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -22,7 +22,12 @@ class InvoicePaymentSucceeded implements Handler
         $invoice = $this->getInvoiceObject($event);
         $line = $this->getFirstLineItem($invoice);
 
-        Tenant::activateSubscription($invoice->customer, $line->period->end, $line->plan->nickname);
+        Tenant::activateSubscription(
+            $invoice->customer,
+            $line->period->end,
+            $line->plan->nickname,
+            $invoice->subscription
+        );
     }
 
     /**

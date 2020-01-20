@@ -7,17 +7,19 @@ class Tenant
     /**
      * Activate the subscription for the tenant.
      *
-     * @param $customerId
-     * @param $endsAt
-     * @param $nickname
+     * @param string $customerId
+     * @param int $endsAt
+     * @param string $nickname
+     * @param string $subscription
      */
-    public static function activateSubscription($customerId, $endsAt, $nickname)
+    public static function activateSubscription($customerId, $endsAt, $nickname, $subscription)
     {
         $tenant = \GeorgeHanson\SaaS\Database\Models\Tenant::where('customer_id', $customerId)->first();
         $tenant->update([
             'subscription_ends_at' => \Carbon\Carbon::createFromTimestamp($endsAt),
             'subscription_active' => true,
-            'subscription_plan' => $nickname
+            'subscription_plan' => $nickname,
+            'subscription_id' => $subscription
         ]);
     }
 
