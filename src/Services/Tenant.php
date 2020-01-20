@@ -2,8 +2,32 @@
 
 namespace GeorgeHanson\SaaS\Services;
 
+use GeorgeHanson\SaaS\Database\Models\Tenant as Model;
+use Illuminate\Support\Facades\Log;
+use Stripe\Exception\ApiErrorException;
+use Stripe\Subscription;
+
 class Tenant
 {
+    /**
+     * Cancel the subscription for the tenant.
+     *
+     * @param Model $tenant
+     * @return bool
+     */
+    public static function cancelSubscription(Model $tenant)
+    {
+        try {
+            $subscription = Subscription::retrieve($tenant->subscription_id);
+            $subscription->delete();
+
+            return true;
+        } catch (ApiErrorException $e) {
+            Log::error('Could not cancel subscription');
+            return false;
+        }
+    }
+
     /**
      * Activate the subscription for the tenant.
      *
@@ -14,7 +38,7 @@ class Tenant
      */
     public static function activateSubscription($customerId, $endsAt, $nickname, $subscription)
     {
-        $tenant = \GeorgeHanson\SaaS\Database\Models\Tenant::where('customer_id', $customerId)->first();
+        $tenant = Model::where('customer_id', $customerId)->first();
         $tenant->update([
             'subscription_ends_at' => \Carbon\Carbon::createFromTimestamp($endsAt),
             'subscription_active' => true,
@@ -30,7 +54,7 @@ class Tenant
      */
     public function create($name)
     {
-        $tenant = \GeorgeHanson\SaaS\Database\Models\Tenant::create(['name' => $name]);
+        $tenant = Model::create(['name' => $name]);
 
         if (config('saas.billing.enabled')) {
             $this->getPaymentGateway()->createCustomer($tenant);

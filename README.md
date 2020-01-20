@@ -99,7 +99,8 @@ You can use the following method to check if the tenant has an active subscripti
 SaaS::isSubscribed();
 ```
 
-To cancel the users subscription, you can simply call the following method.
+To cancel the users subscription, you can simply call the following method. The method returns a boolean value to
+represent whether it was successful in unsubscribing the tenant or not.
 
 ```php
 SaaS::unsubscribe();

@@ -23,6 +23,19 @@ class SaaS
     }
 
     /**
+     * Unsubscribe the tenant.
+     *
+     * @param Tenant|null $tenant
+     * @return bool
+     */
+    public static function unsubscribe(Tenant $tenant = null)
+    {
+        $tenant = $tenant ?? static::tenant();
+
+        return \GeorgeHanson\SaaS\Services\Tenant::cancelSubscription($tenant);
+    }
+
+    /**
      * Setup a new plan.
      *
      * @param $name
