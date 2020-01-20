@@ -41,5 +41,15 @@ return [
          * The url you would like to take the customer to when they cancel during the subscribe process.
          */
         'cancel_url_redirect' => '',
+
+        /**
+         * The url you would like to take the customer to when they successfully update their billing details.
+         */
+        'update_success_url_redirect' => '',
+
+        /**
+         * The url you would like to take the customer to when they cancel during the update process.
+         */
+        'update_cancel_url_redirect' => '',
     ],
 ];

@@ -106,4 +106,13 @@ represent whether it was successful in unsubscribing the tenant or not.
 SaaS::unsubscribe();
 ```
 
+In order to update the subscription details such as payment methods, you can submit a form request. This launches
+the Stripe checkout for the user to update their details. For example:
+
+```blade
+<form method="POST" action="{{ SaaS::updateSubscriptionUrl() }}">
+    <button type="submit">Update Payment Details</button>
+</form>
+```
+
 WIP

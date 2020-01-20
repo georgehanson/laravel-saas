@@ -23,6 +23,14 @@ class SaaS
     }
 
     /**
+     * Get the subscribe url for updating details.
+     */
+    public static function updateSubscriptionUrl()
+    {
+        return url('saas/subscribe/update');
+    }
+
+    /**
      * Unsubscribe the tenant.
      *
      * @param Tenant|null $tenant

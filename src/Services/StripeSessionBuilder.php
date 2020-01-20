@@ -28,6 +28,25 @@ class StripeSessionBuilder
     }
 
     /**
+     * Create the session to update.
+     */
+    public function toUpdate()
+    {
+        return Session::create([
+            'payment_method_types' => ['card'],
+            'mode' => 'setup',
+            'setup_intent_data' => [
+                'metadata' => [
+                    'customer_id' => $this->tenant->customer_id,
+                    'subscription_id' => $this->tenant->subscription_id,
+                ],
+            ],
+            'success_url' => url(config('saas.billing.update_success_url_redirect')),
+            'cancel_url' => url(config('saas.billing.update_cancel_url_redirect')),
+        ]);
+    }
+
+    /**
      * The plan to create the stripe session for.
      *
      * @param string $plan
