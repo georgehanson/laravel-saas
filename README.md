@@ -86,4 +86,17 @@ referenced by the config. It is also important to add the following to your `Ver
     ];
 ```
 
+You can check the status of a tenants subscription using some helper methods. The following method can be called to see if
+the subscription is currently active, but will expire soon and not be renewed.
+
+```php
+SaaS::subscriptionEndingSoon();
+```
+
+You can use the following method to check if the tenant has an active subscription.
+
+```php
+SaaS::isSubscribed();
+```
+
 WIP
