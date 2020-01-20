@@ -70,4 +70,9 @@ name within the request. For example, you may have a form like this on your page
 Then when the user submits the form, they will be taken to Stripes Checkout page where they can enter their relevant card
 details. Once complete they will be returned to the urls specified within the `saas.php` config file.
 
+#### Webhooks Configuration
+This package utilises Stripes webhooks extensively so it is important that these are configured correctly. Please review the Stripe
+documentation for creating a Webhook key. Once this key has been created you can store this within your environment variable which is
+referenced by the config.
+
 WIP
