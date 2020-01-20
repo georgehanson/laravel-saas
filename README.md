@@ -73,6 +73,17 @@ details. Once complete they will be returned to the urls specified within the `s
 #### Webhooks Configuration
 This package utilises Stripes webhooks extensively so it is important that these are configured correctly. Please review the Stripe
 documentation for creating a Webhook key. Once this key has been created you can store this within your environment variable which is
-referenced by the config.
+referenced by the config. It is also important to add the following to your `VerifyCsrfToken` middleware.
+
+```php
+/**
+     * The URIs that should be excluded from CSRF verification.
+     *
+     * @var array
+     */
+    protected $except = [
+        'saas/hooks'
+    ];
+```
 
 WIP
