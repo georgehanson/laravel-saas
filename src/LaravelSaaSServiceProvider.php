@@ -4,6 +4,7 @@ namespace GeorgeHanson\SaaS;
 
 use GeorgeHanson\SaaS\Services\PaymentGateway;
 use GeorgeHanson\SaaS\Services\PaymentGateways\Stripe;
+use GeorgeHanson\SaaS\Services\Tenant;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelSaaSServiceProvider extends ServiceProvider
@@ -38,6 +39,10 @@ class LaravelSaaSServiceProvider extends ServiceProvider
 
         $this->app->singleton(PaymentGateway::class, function () {
             return app(Stripe::class);
+        });
+
+        $this->app->singleton('saas.services.tenant', function () {
+            return app(Tenant::class);
         });
 
         \Stripe\Stripe::setApiKey(config('saas.billing.stripe.secret_key'));

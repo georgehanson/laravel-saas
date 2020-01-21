@@ -40,7 +40,7 @@ class SaaS
     {
         $tenant = $tenant ?? static::tenant();
 
-        return \GeorgeHanson\SaaS\Services\Tenant::cancelSubscription($tenant);
+        return app('saas.services.tenant')->cancelSubscription($tenant);
     }
 
     /**

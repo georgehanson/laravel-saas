@@ -18,6 +18,7 @@
     <php>
         <includePath>.</includePath>
         <env name="APP_ENV" value="testing"/>
+        <env name="APP_KEY" value="base64:2TcPjqf7FmAagnbS1lN8PSyN3ER+woxA52Z5mgQTTA0="/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
         <env name="QUEUE_DRIVER" value="sync"/>

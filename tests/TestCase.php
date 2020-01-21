@@ -10,6 +10,7 @@ use GeorgeHanson\SaaS\Tests\Resources\FakePaymentGateway;
 use GeorgeHanson\SaaS\Tests\Resources\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
+use Mockery;
 
 abstract class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -65,5 +66,16 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
     {
         Hash::setRounds(4);
         $app['config']->set('saas.user_model', User::class);
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        if ($container = Mockery::getContainer()) {
+            $this->addToAssertionCount($container->mockery_getExpectationCount());
+        }
+
+        Mockery::close();
     }
 }
